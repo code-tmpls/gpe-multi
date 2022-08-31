@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Package1
+name: Package2
 
 on:
   push
@@ -14,8 +14,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Setup Package1
-        working-directory: ./package1
+      - name: Setup Package2
+        working-directory: ./package2
         run: npm ci
 
   publish-gpr:
@@ -32,8 +32,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup Package1
-        working-directory: ./package1
+      - name: Setup Package2
+        working-directory: ./package2
         run: | 
           npm ci
           npm publish
