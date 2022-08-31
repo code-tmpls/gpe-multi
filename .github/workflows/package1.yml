@@ -14,8 +14,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - working-directory: ./package1
-      - run: npm ci
+      - name: Setup Package1
+        working-directory: ./package1
+        run: npm ci
 
   publish-gpr:
     needs: build
@@ -31,8 +32,10 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: cd package1
-      - run: npm ci
-      - run: npm publish
+      - name: Setup Package1
+        working-directory: ./package1
+        run: | 
+          npm ci
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
